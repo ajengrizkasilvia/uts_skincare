@@ -2,6 +2,7 @@ import 'package:sqflite/sqflite.dart';
 import 'dart:async';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
+import 'package:uts_skincare/model/kategori.dart';
 import 'model/item.dart';
 
 class DbHelper {
@@ -31,34 +32,64 @@ class DbHelper {
  stok INTEGER
  )
  ''');
+
+    await db.execute(''
+      'CREATE TABLE kategori (id INTEGER PRIMARY KEY AUTOINCREMENT, kategori TEXT, tipewajah TEXT)'
+    '');
   }
 
-//select databases
+//select databases item
   Future<List<Map<String, dynamic>>> select() async {
     Database db = await this.initDb();
     var mapList = await db.query('item', orderBy: 'name');
     return mapList;
   }
 
-//create databases
+//select databases kategori
+  Future<List<Map<String, dynamic>>> selectKat() async {
+    Database db = await this.initDb();
+    var mapList = await db.query('kategori', orderBy: 'name');
+    return mapList;
+  }
+
+//create databases item
   Future<int> insert(Item object) async {
     Database db = await this.initDb();
     int count = await db.insert('item', object.toMap());
     return count;
   }
+//create databases kategori
+  Future<int> insertKat(Kategori object) async {
+    Database db = await this.initDb();
+    int count = await db.insert('kategori', object.toMap());
+    return count;
+  }
 
-//update databases
+//update databases item
   Future<int> update(Item object) async {
     Database db = await this.initDb();
     int count = await db
         .update('item', object.toMap(), where: 'id=?', whereArgs: [object.id]);
     return count;
+  }
+//update databases kategori
+  Future<int> updateKat(Kategori object) async {
+    Database db = await this.initDb();
+    int count = await db
+        .update('kategori', object.toMap(), where: 'id=?', whereArgs: [object.id]);
+    return count;
   } 
 
-//delete databasess
+//delete databases item
   Future<int> delete(int id) async {
     Database db = await this.initDb();
     int count = await db.delete('item', where: 'id=?', whereArgs: [id]);
+    return count;
+  }
+//delete databases kategori
+  Future<int> deleteKat(int id) async {
+    Database db = await this.initDb();
+    int count = await db.delete('kategori', where: 'id=?', whereArgs: [id]);
     return count;
   }
 

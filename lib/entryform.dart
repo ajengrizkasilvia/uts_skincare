@@ -148,6 +148,7 @@ class EntryFormState extends State<EntryForm> {
                             // tambah data
                             item = Item(
                                 nameController.text,
+                                brandController.text,
                                 int.parse(priceController.text),
                                 kodeController.text,
                                 int.parse(stokController.text));
@@ -179,6 +180,9 @@ class EntryFormState extends State<EntryForm> {
                         onPressed: () {
                           Navigator.pop(context);
                         },
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15)
+                        ),
                       ),
                     ),
                   ],
