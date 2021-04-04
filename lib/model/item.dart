@@ -24,7 +24,7 @@ class Item {
   set stok(value) => this._stok = value;
 
 // konstruktor versi 1
-  Item(this._name, this._price, this._kode, this._stok);
+  Item(this._name,this._brand, this._price, this._kode, this._stok);
 
 // konstruktor versi 2: konversi dari Map ke Item
   Item.fromMap(Map<String, dynamic> map) {
