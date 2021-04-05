@@ -103,6 +103,16 @@ class DbHelper {
     return itemList;
   }
 
+  Future<List<Kategori>> getKategoriList() async {
+    var kategoriMapList = await select();
+    int count = kategoriMapList.length;
+    List<Kategori> kategoriList = List<Kategori>();
+    for (int i = 0; i < count; i++) {
+      kategoriList.add(Kategori.fromMap(kategoriMapList[i]));
+    }
+    return kategoriList;
+  }
+
   factory DbHelper() {
     if (_dbHelper == null) {
       _dbHelper = DbHelper._createObject();

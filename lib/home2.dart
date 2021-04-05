@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:uts_skincare/dbhelper.dart';
-import 'package:uts_skincare/entryform.dart';
+import 'package:uts_skincare/entryformKategori.dart';
+import 'package:uts_skincare/model/kategori.dart';
 import 'dart:async';
-import 'model/item.dart'; 
 
 //pendukung program asinkron
-class Home extends StatefulWidget {
+class Home2 extends StatefulWidget {
   @override
-  HomeState createState() => HomeState();
+  Home2State createState() => Home2State();
 }
 
-class HomeState extends State<Home> {
+class Home2State extends State<Home2> {
   DbHelper dbHelper = DbHelper(); //memanggil kls dbhelp
   int count = 0;
-  List<Item> itemList; //dekl list
+  List<Kategori> kategoriList; //dekl list
   @override
   Widget build(BuildContext context) {
-    if (itemList == null) {
-      itemList = List<Item>();
+    if (kategoriList == null) {
+      kategoriList = List<Kategori>();
     }
     return Scaffold(
       appBar: AppBar(
-        title: Text('Daftar Skincare'),
+        title: Text('Kategori Skincare'),
       ),
       body: Column(children: [
         Expanded( //memperluas children ke tempat yg terpisah
@@ -33,12 +33,12 @@ class HomeState extends State<Home> {
           child: SizedBox(
             width: double.infinity, //button sampai terpinggir
             child: RaisedButton(
-              child: Text("Tambah Item"),
+              child: Text("Tambah Kategori"),
               onPressed: () async { //tdk menunggu proses
-                var item = await navigateToEntryForm(context, null);
-                if (item != null) { //jika terisi maka akan diinsert
+                var kategori = await navigateToEntryForm(context, null);
+                if (kategori != null) { //jika terisi maka akan diinsert
                   //TODO 2 Panggil Fungsi untuk Insert ke DB
-                  int result = await dbHelper.insert(item);
+                  int result = await dbHelper.insertKat(kategori);
                   if (result > 0) {
                     updateListView();
                   }
@@ -51,10 +51,10 @@ class HomeState extends State<Home> {
     );
   }
 
-  Future<Item> navigateToEntryForm(BuildContext context, Item item) async { 
+  Future<Kategori> navigateToEntryForm(BuildContext context, Kategori kategori) async { 
     var result = await Navigator.push(context,
         MaterialPageRoute(builder: (BuildContext context) {
-      return EntryForm(item);
+      return EntryFormKategori(kategori);
     }));
     return result;
   }
@@ -73,25 +73,25 @@ class HomeState extends State<Home> {
               child: Icon(Icons.ad_units),
             ), //untuk icon hp
             title: Text(
-              this.itemList[index].name,
+              this.kategoriList[index].kategori,
               style: textStyle,
             ),
-            subtitle: Text(this.itemList[index].price.toString()),
+            subtitle: Text(this.kategoriList[index].tipewajah),
             trailing: GestureDetector(
               child: Icon(Icons.delete),
               onTap: () async {
-                //TODO 3 Panggil Fungsi untuk Delete dari DB berdasarkan Item
-              int result = await dbHelper.delete(this.itemList[index].id);
+                //TODO 3 Panggil Fungsi untuk Delete dari DB berdasarkan Kategori
+              int result = await dbHelper.deleteKat(this.kategoriList[index].id);
                 if (result > 0){
                   updateListView();
                 }
               },
             ),
             onTap: () async {
-              var item =
-                  await navigateToEntryForm(context, this.itemList[index]);
+              var kategori =
+                  await navigateToEntryForm(context, this.kategoriList[index]);
               //TODO 4 Panggil Fungsi untuk Edit data
-                int result = await dbHelper.update(item);
+                int result = await dbHelper.updateKat(kategori);
                 if (result > 0){
                   updateListView();
                 }
@@ -102,16 +102,16 @@ class HomeState extends State<Home> {
     );
   }
 
-  //update List item
+  //update List kategori
   void updateListView() {
     final Future<Database> dbFuture = dbHelper.initDb();
     dbFuture.then((database) {
       //TODO 1 Select data dari DB
-      Future<List<Item>> itemListFuture = dbHelper.getItemList();
-      itemListFuture.then((itemList) {
+      Future<List<Kategori>> kategoriListFuture = dbHelper.getKategoriList();
+      kategoriListFuture.then((kategoriList) {
         setState(() {
-          this.itemList = itemList;
-          this.count = itemList.length;
+          this.kategoriList = kategoriList;
+          this.count = kategoriList.length;
         });
       });
     });
