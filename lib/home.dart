@@ -74,7 +74,7 @@ class HomeState extends State<Home> {
           child: ListTile(
             leading: CircleAvatar(
               backgroundColor: Colors.pinkAccent,
-              child: Icon(Icons.ad_units),
+              child: Icon(Icons.face_retouching_natural),
             ), //untuk icon hp
             title: 
               Text(
