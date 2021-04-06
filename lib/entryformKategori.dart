@@ -55,7 +55,7 @@ class EntryFormKategoriState extends State<EntryFormKategori> {
               Padding(
                 padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
                 child: TextField(
-                  controller: kategoriController,
+                  controller: tipewajahController,
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                     labelText: 'Tipe Wajah',
@@ -114,9 +114,6 @@ class EntryFormKategoriState extends State<EntryFormKategori> {
                         onPressed: () {
                           Navigator.pop(context);
                         },
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15)
-                        ),
                       ),
                     ),
                   ],

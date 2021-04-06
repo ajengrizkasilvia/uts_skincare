@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
        
-        primarySwatch: Colors.blueGrey,
+        primarySwatch: Colors.yellow,
         // This makes the visual density adapt to the platform that you run
         // the app on. For desktop platforms, the controls will be smaller and
         // closer together (more dense) than on mobile platforms.
@@ -26,7 +26,8 @@ class MyApp extends StatelessWidget {
         length: 2,
         child: Scaffold(
           appBar: AppBar(
-            title: Text("DAFTAR SKINCARE"),
+            title: Text("````SKINCAREKU````"),
+            centerTitle: true,
             bottom: TabBar(
               tabs: [
                 Tab(

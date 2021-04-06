@@ -1,4 +1,8 @@
 # uts_skincare
+![plot](./image/gb1.jpeg)
+![plot](./image/gb2.jpeg)
+![plot](./image/gb3.jpeg)
+![plot](./image/gb4.jpeg)
 
 A new Flutter project.
 

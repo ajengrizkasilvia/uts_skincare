@@ -16,6 +16,10 @@ class HomeState extends State<Home> {
   int count = 0;
   List<Item> itemList; //dekl list
   @override
+  void initState() {
+    super.initState();
+    updateListView();
+  }
   Widget build(BuildContext context) {
     if (itemList == null) {
       itemList = List<Item>();
@@ -69,14 +73,22 @@ class HomeState extends State<Home> {
           elevation: 2.0,
           child: ListTile(
             leading: CircleAvatar(
-              backgroundColor: Colors.red,
+              backgroundColor: Colors.pinkAccent,
               child: Icon(Icons.ad_units),
             ), //untuk icon hp
-            title: Text(
-              this.itemList[index].name,
-              style: textStyle,
+            title: 
+              Text(
+                this.itemList[index].name,
+                style: textStyle,
             ),
-            subtitle: Text(this.itemList[index].price.toString()),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(this.itemList[index].brand),
+                Text(this.itemList[index].price.toString()),
+                Text(this.itemList[index].stok.toString()),
+              ]
+            ),
             trailing: GestureDetector(
               child: Icon(Icons.delete),
               onTap: () async {

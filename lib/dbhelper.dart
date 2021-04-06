@@ -48,7 +48,7 @@ class DbHelper {
 //select databases kategori
   Future<List<Map<String, dynamic>>> selectKat() async {
     Database db = await this.initDb();
-    var mapList = await db.query('kategori', orderBy: 'name');
+    var mapList = await db.query('kategori', orderBy: 'kategori');
     return mapList;
   }
 
@@ -104,7 +104,7 @@ class DbHelper {
   }
 
   Future<List<Kategori>> getKategoriList() async {
-    var kategoriMapList = await select();
+    var kategoriMapList = await selectKat();
     int count = kategoriMapList.length;
     List<Kategori> kategoriList = List<Kategori>();
     for (int i = 0; i < count; i++) {

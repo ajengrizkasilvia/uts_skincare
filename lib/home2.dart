@@ -16,6 +16,10 @@ class Home2State extends State<Home2> {
   int count = 0;
   List<Kategori> kategoriList; //dekl list
   @override
+  void initState() {
+    super.initState();
+    updateListView();
+  }
   Widget build(BuildContext context) {
     if (kategoriList == null) {
       kategoriList = List<Kategori>();
@@ -69,7 +73,7 @@ class Home2State extends State<Home2> {
           elevation: 2.0,
           child: ListTile(
             leading: CircleAvatar(
-              backgroundColor: Colors.red,
+              backgroundColor: Colors.pinkAccent,
               child: Icon(Icons.ad_units),
             ), //untuk icon hp
             title: Text(

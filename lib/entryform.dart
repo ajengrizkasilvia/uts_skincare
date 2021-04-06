@@ -61,7 +61,7 @@ class EntryFormState extends State<EntryForm> {
               Padding(
                 padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
                 child: TextField(
-                  controller: nameController,
+                  controller: brandController,
                   keyboardType: TextInputType.text,
                   decoration: InputDecoration(
                     labelText: 'Brand Barang',
@@ -180,9 +180,6 @@ class EntryFormState extends State<EntryForm> {
                         onPressed: () {
                           Navigator.pop(context);
                         },
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15)
-                        ),
                       ),
                     ),
                   ],
